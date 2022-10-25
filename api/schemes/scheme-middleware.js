@@ -34,16 +34,16 @@ const checkSchemeId = async (req, res, next) => {
   }
 */
 const validateScheme = (req, res, next) => {
-  try{
-    const { name } = req.body;
-    if(!name || !name.trim() || name !== 'string'){
-      res.status(400).json({
+    const { scheme_name } = req.body;
+    if(!scheme_name||
+       typeof scheme_name !== 'string' ||
+       !scheme_name.trim()){
+      return res.status(400).json({
         message: 'invalid scheme_name'
-      })
+      });
+    }else{
+      next();
     }
-  }catch(err){
-    next(err);
-  }
 }
 
 /*
